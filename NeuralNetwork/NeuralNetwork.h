@@ -11,31 +11,38 @@
 
 #include <vector>
 #include <random>
+
 class NeuralNetwork {
 private:
-    std::vector<int> nodes;
+    std::vector<int> neurons;
     std::vector<std::vector<std::vector<float>>> weights; // vector of weights matrix
     float learningRate;
+
     void initWeights();
+
 public:
     NeuralNetwork(std::vector<int> nodes, float learningRate = DEFAULT_LEARNING_RATE);
-    float getLearningRate() const;
-    static float getRandomNum(const float& meanValue = MEAN_VALUE, const float& standardDeviation = DEFAULT_STANDARD_DEVIATION);
 
-    std::vector<std::vector<float>> getLayerWeights(const size_t& layer) const;
+    float getLearningRate() const;
+
+    static float
+    getRandomNum(const float &meanValue = MEAN_VALUE, const float &standardDeviation = DEFAULT_STANDARD_DEVIATION);
+
+    std::vector<std::vector<float>> getLayerWeights(const size_t &layer) const;
+
     std::vector<std::vector<std::vector<float>>> getLayersWeights() const;
-    std::vector<float> query(const std::vector<float>& input) const;
+
+    std::vector<std::vector<float>> query(const std::vector<float> &input) const;
 
     void train(std::vector<std::vector<float>> input, std::vector<std::vector<float>> target);
 
-    inline static float sigmoid(float num){
+    inline static float sigmoid(float num) {
         return 1. / (1. + exp((-1) * num));
     }
 
     //    Debugging & Research Methods
-    void displayLayerWeights(const size_t& layer) const;
+    void displayLayerWeights(const size_t &layer) const;
 };
-
 
 
 #endif //NEURALNETWORK_NEURALNETWORK_H
